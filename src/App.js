@@ -1,23 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbaar from './components/Navbaar';
+import CreateToken from './components/CreateToken';
+import HaveToken from './components/HaveToken';
+import TokenTab from './components/TokenTab';
+
+// bootstrap import
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbaar />
+      <div class="container col-md-9">
+        <div class="card w-100 shadow">
+          <TokenTab />
+          <div class="card">
+            <div class="formbold-main-wrapper">
+              <div class="">
+                <CreateToken />
+                <HaveToken />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
