@@ -16,7 +16,7 @@ export default function ImageUpload(props) {
                     </div>
                     <div id="imagePreview" className="preview-container"></div>
                     <div>
-                        <button className="btn btn-primary mt-2 mb-3" onclick="uploadImages()">Next</button>
+                        <button className="btn btn-primary mt-2 mb-3" onClick={props.handleNextStep}>Next</button>
                     </div>
                 </div>
         </>

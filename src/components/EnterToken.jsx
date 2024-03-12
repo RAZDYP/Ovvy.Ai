@@ -11,7 +11,7 @@ export default function EnterToken(props) {
                             className="formbold-form-input" value={props.token}></textarea>
                     </div>
                     <div>
-                        <button className="btn btn-primary mt-2 mb-3" >Next</button>
+                        <button className="btn btn-primary mt-2 mb-3" onClick={props.handleNextStep}>Next</button>
                     </div>
                 </div>
         </>

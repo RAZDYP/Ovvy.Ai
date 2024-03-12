@@ -5,11 +5,22 @@ import EnterToken from "./EnterToken";
 import ImageUpload from "./ImageUpload";
 
 export default function HaveToken(props) {
+
+    const [currentStep, setCurrentStep] = useState(1)
+
+    const handleNextStep = () => {
+        setCurrentStep(currentStep + 1)
+    }
+
+    const handlePreviousStep = () => {
+        setCurrentStep(currentStep - 1)
+    }
+
     return (
         <>
             <HaveTokenTabs />
-            <EnterToken token={props.token} />
-            <ImageUpload />
+            {currentStep === 1 && <EnterToken token={props.token} handleNextStep={handleNextStep}/>}
+            {currentStep === 2 && <ImageUpload token={props.token} handleNextStep={handleNextStep} />}
             <div className="formbold-form-step-2">
                 <div className="formbold-step-2-notifications hidden" id="formbold-steps-tab-comfirmation">
                     <div className="w-100 d-flex align-items-center justify-content-between">
