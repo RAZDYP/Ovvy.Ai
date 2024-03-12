@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-export default function CreateToken() {
+export default function CreateToken(props) {
 
     const [bussinessId, setBussinessId] = useState('')
     const [bussinessApiKey, setBussinessApiKey] = useState('')
     const [secretKey, setSecretKey] = useState('')
-    const [token, setToken] = useState('')
 
     const handleCreateToken = async () => {
         await fetch('http://34.138.136.100:8004/create-token', {
@@ -20,7 +19,7 @@ export default function CreateToken() {
             body: JSON.stringify({ /* your data here */ }),
         }).then(response => response.json()).then(data => {
             console.log(data)
-            setToken(data.access_token)
+            props.setToken(data.access_token)
         }).catch(err => {
             console.log(err)
         })
@@ -88,7 +87,7 @@ export default function CreateToken() {
                 <div className="copy-token-btn-content">
                     <div className="mt-4 mb-5 d-flex align-items-center justify-content-between ">
                         <input id="access-token-copy" className="fw-semibold col-md-10"
-                            style={{ textAlign: "left", fontSize: "large" }} value={token}>
+                            style={{ textAlign: "left", fontSize: "large" }} value={props.token}>
                         </input>
                         <div>
                             <button className="btn  rounded fw-bold bg-light  d-flex align-items-center"

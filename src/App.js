@@ -4,22 +4,43 @@ import Navbaar from './components/Navbaar';
 import CreateToken from './components/CreateToken';
 import HaveToken from './components/HaveToken';
 import TokenTab from './components/TokenTab';
+import { useState } from 'react';
 
 // bootstrap import
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
+
+  const [createToken, setCreateToken] = useState(true)
+  const [haveToken, setHaveToken] = useState(false)
+  const [token, setToken] = useState('')
+
+  const handleCreateTokenTab = () => {
+    setCreateToken(true)
+    setHaveToken(false)
+  }
+
+  const handleHaveTokenTab = () => {
+    setCreateToken(false)
+    setHaveToken(true)
+  }
+
+  console.log("this is token: ", token)
+
   return (
     <div className="App">
       <Navbaar />
       <div class="container col-md-9">
         <div class="card w-100 shadow">
-          <TokenTab />
+          <TokenTab
+            handleCreateTokenTab={handleCreateTokenTab}
+            handleHaveTokenTab={handleHaveTokenTab}
+          />
           <div class="card">
             <div class="formbold-main-wrapper">
               <div class="">
-                <CreateToken />
-                <HaveToken />
+                {createToken && <CreateToken token={token} setToken={setToken} />}
+                {haveToken && <HaveToken token={token} />}
               </div>
             </div>
           </div>

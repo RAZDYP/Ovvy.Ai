@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function HaveToken() {
+export default function HaveToken(props) {
     return (
         <>
             <div className="formbold-form-step-2">
@@ -34,7 +34,7 @@ export default function HaveToken() {
                         <label for="token" className="formbold-form-label"> Enter your Authentication Token:
                         </label>
                         <textarea rows="6" name="token" id="message" placeholder="Enter your Token ..."
-                            className="formbold-form-input"></textarea>
+                            className="formbold-form-input" value={props.token}></textarea>
                     </div>
                     <div>
                         <button className="btn btn-primary mt-2 mb-3" onclick="getToken()">Next</button>
