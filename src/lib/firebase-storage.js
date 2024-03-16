@@ -23,13 +23,13 @@ const analytics = getAnalytics(app);
 const storage = getStorage();
 
 const uploadImages = async (files) => {
-    const promises = files.map(async (file) => {
-        const storageRef = ref(storage, 'images/', file.name);
-        const snapshot = await uploadBytes(storageRef, file);
-        return getDownloadURL(snapshot.ref);
-    });
-    
-    return Promise.all(promises);
+  const promises = files.map(async (file) => {
+    const storageRef = ref(storage, 'images/', file.name);
+    const snapshot = await uploadBytes(storageRef, file);
+    return getDownloadURL(snapshot.ref);
+  });
+
+  return Promise.all(promises);
 }
 
 export default uploadImages;

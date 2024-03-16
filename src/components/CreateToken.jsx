@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-
+import SpinnerComp from "./SpinnerComp";
+import LoadingBtn from "./LoadingBtn";
+import SpinnerWhite from "./SpinnerWhite";
 export default function CreateToken(props) {
 
     const [bussinessId, setBussinessId] = useState('')
     const [bussinessApiKey, setBussinessApiKey] = useState('')
     const [secretKey, setSecretKey] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const handleCreateToken = async () => {
+        setLoading(true)
         await fetch('http://34.138.136.100:8004/create-token', {
             method: 'POST',
             headers: {
@@ -20,8 +24,10 @@ export default function CreateToken(props) {
         }).then(response => response.json()).then(data => {
             console.log(data)
             props.setToken(data.access_token)
+            setLoading(false)
         }).catch(err => {
             console.log(err)
+            setLoading(false)
         })
     }
 
@@ -32,7 +38,7 @@ export default function CreateToken(props) {
         document.execCommand("copy");
         alert("Copied the text: " + copyText.value);
     }
-    
+
 
     return (
         <>
@@ -66,20 +72,24 @@ export default function CreateToken(props) {
                     </div>
                     <div className="formbold-form-btn-wrapper ">
                         <button className="formbold-btn create-token-submit-button" onClick={handleCreateToken}>
-                            Submit
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_1675_1807)">
-                                    <path
-                                        d="M10.7814 7.33312L7.20541 3.75712L8.14808 2.81445L13.3334 7.99979L8.14808 13.1851L7.20541 12.2425L10.7814 8.66645H2.66675V7.33312H10.7814Z"
-                                        fill="white" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_1675_1807">
-                                        <rect width="16" height="16" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
+                            {loading ? <SpinnerWhite /> : <div className="d-flex align-items-center justify-content-between">
+                                Create Token
+                                <svg width="20" height="20" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_1675_1807)">
+                                        <path
+                                            d="M10.7814 7.33312L7.20541 3.75712L8.14808 2.81445L13.3334 7.99979L8.14808 13.1851L7.20541 12.2425L10.7814 8.66645H2.66675V7.33312H10.7814Z"
+                                            fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1675_1807">
+                                            <rect width="16" height="16" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>}
+
+
                         </button>
 
                     </div>

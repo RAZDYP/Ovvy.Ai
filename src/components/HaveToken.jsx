@@ -3,10 +3,13 @@ import { useState } from 'react';
 import HaveTokenTabs from "./HaveTokenTabs";
 import EnterToken from "./EnterToken";
 import ImageUpload from "./ImageUpload";
+import Confirmation from "./Confirmation";
 
 export default function HaveToken(props) {
 
     const [currentStep, setCurrentStep] = useState(1)
+    const [taskId, setTaskId] = useState([])
+    const [imageList, setImageList] = useState([]);
 
     const handleNextStep = () => {
         setCurrentStep(currentStep + 1)
@@ -15,36 +18,14 @@ export default function HaveToken(props) {
     const handlePreviousStep = () => {
         setCurrentStep(currentStep - 1)
     }
-
+    console.log("This is the image list: ", imageList)
+    console.log("This is the task id: ", taskId)
     return (
         <>
             <HaveTokenTabs />
-            {currentStep === 1 && <EnterToken token={props.token} handleNextStep={handleNextStep}/>}
-            {currentStep === 2 && <ImageUpload token={props.token} handleNextStep={handleNextStep} />}
-            <div className="formbold-form-step-2">
-                <div className="formbold-step-2-notifications hidden" id="formbold-steps-tab-comfirmation">
-                    <div className="w-100 d-flex align-items-center justify-content-between">
-                        <div className="col-md-9">
-                            <div className="card shadow">
-                                <div className="card-body">
-                                    <img src="https://ovvy.ai/frontend/images/ovvy-logo.svg" alt="Ovvy Logo"
-                                        width="150" height="100"></img>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div>
-                            <button className="btn btn-primary">Task 1</button>
-
-                        </div>
-                        <div className="col-md-2">
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            {currentStep === 1 && <EnterToken token={props.token} handleNextStep={handleNextStep} />}
+            {currentStep === 2 && <ImageUpload token={props.token} handleNextStep={handleNextStep} setTaskId={setTaskId} setImageList={setImageList} imageList={imageList} taskId={taskId} />}
+            {currentStep === 3 && <Confirmation token={props.token} handleNextStep={handleNextStep} taskId={taskId} imageList={imageList} />}
         </>
     )
 }

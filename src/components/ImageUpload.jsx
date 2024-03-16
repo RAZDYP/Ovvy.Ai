@@ -1,23 +1,69 @@
 import React, { useState } from "react";
 import uploadImages from "../lib/firebase-storage";
+import SpinnerComp from "./SpinnerComp";
+import LoadingBtn from "./LoadingBtn";
+import SpinnerWhite from "./SpinnerWhite";
 
 export default function ImageUpload(props) {
+    const [loading, setLoading] = useState(false)
+    // const [choosenFiles, setChoosenFiles] = useState([])
+    console.log("this is the token in imageUploadpage", props.token)
 
-    const [files, setFiles] = useState([]);
-    const [imageList, setImageList] = useState([]);
+    const [selectedImages, setSelectedImages] = useState([]);
 
+    const handleFileChange = (event) => {
+        const files = event.target.files;
+        const imagesArray = [];
 
+        for (let i = 0; i < files.length; i++) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagesArray.push(e.target.result);
+                if (imagesArray.length === files.length) {
+                    setSelectedImages(imagesArray);
+                }
+            };
+            reader.readAsDataURL(files[i]);
+        }
+    };
     const handleImageUploadToFirebase = async (e) => {
+        setLoading(true);
         const file = e.target.files;
         // make sure to convert the FileList to an Array
         const fileArray = Array.from(file);
         const urls = await uploadImages(fileArray);
+        if (urls) {
+            handleFileChange(e);
+        }
         console.log(urls);
-        setImageList(urls);
+        props.setImageList(urls);
+        setLoading(false);
     }
 
+    const checkTaskStatus = async (taskId) => {
+        console.log("This is the token in checkTaskStatus", props.token, "This is the task in checkstatus", taskId)
+        try {
+            const response = await fetch('http://34.138.136.100:8004/tasks/' + taskId, {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + props.token,
+                },
+            })
+            const data = await response.json();
+            console.log(data);
+            return data;
+        }
+        catch (error) {
+            console.error('Error checking task status:', error);
+        }
+    }
+
+
     const handleUploadImageToServer = async () => {
-        await fetch('http://34.138.136.100:8004/tasks', {
+        try {
+            const response = await fetch('http://34.138.136.100:8004/tasks', {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
@@ -25,36 +71,85 @@ export default function ImageUpload(props) {
                     'Authorization': 'Bearer ' + props.token,
                 },
                 body: JSON.stringify({
-                    images: imageList,
+                    images: props.imageList,
                     folder_id: "1234",
                     strength: 0.08
                 }),
-            }).then(response => response.json()).then(data => {
-                console.log('task_id', data)
-                const taskId = data.task_id;
-            }).catch(err => {
-                console.log(err)
             })
+            const data = await response.json();
+            console.log('task_id', data)
+            const taskId = data.task_id;
+            props.setTaskId([...props.taskId, taskId]);
+
+            // interval
+            const interval = setInterval(async () => {
+                const taskStatusData = await checkTaskStatus(taskId);
+                if (taskStatusData.batch_task_status === "SUCCESS") {
+                    clearInterval(interval);
+                    const taskIdInterval = setInterval(async () => {
+                        const response = await fetch('http://34.138.136.100:3000/data/' + taskId, {
+                            method: 'GET',
+                            headers: {
+                                'accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            mode: 'cors'
+                        })
+
+                        if (response.status === 200) {
+                            clearInterval(taskIdInterval);
+                            const taskData = await response.json();
+                            console.log("THIS IS THE TASK DATA", taskData);
+                        } else {
+                            console.log("Task not ready yet");
+                        }
+                    }, 5000)
+                }
+            }, 2000);
+        }
+        catch (error) {
+            console.error('Error uploading image to server:', error);
+        }
     }
 
     return (
         <>
             <div className="formbold-form-step-2-images-upload"
-                    id="formbold-steps-tab-upload-images">
-                    <div className="w-100">
-                        <label for="multiple-image-upload" className="w-100">
-                            <div className="border rounded w-100 p-5">
-                                Choose Images to Upload
-                            </div>
-                        </label>
-                        <input type="file" id="multiple-image-upload" style={{ display: "none" }} name="file"
-                            multiple onChange={handleImageUploadToFirebase} ></input>
-                    </div>
-                    <div id="imagePreview" className="preview-container"></div>
-                    <div>
-                        <button className="btn btn-primary mt-2 mb-3" onClick={handleUploadImageToServer}>Next</button>
-                    </div>
+                id="formbold-steps-tab-upload-images">
+                {/* <Spinner />
+                <LoadingBtn /> */}
+                <div className="w-100">
+
+                    <label for="multiple-image-upload" className="w-100">
+                        <div className="border rounded w-100 p-5">
+                            {loading ? <SpinnerComp /> : "Please Choose Your Files to Upload"}
+                        </div>
+                    </label>
+                    <input type="file" id="multiple-image-upload" style={{ display: "none" }} name="file"
+                        multiple onChange={handleImageUploadToFirebase} ></input>
                 </div>
+                <div className="row mt-3">
+                    {selectedImages.map((image, index) => (
+                        <div className="p-2  rounded-4 col-md-4">
+                            <img className="p-2 border rounded"
+                                key={index}
+                                src={image}
+                                alt={`Selected ${index + 1}`}
+                            />
+                        </div>
+
+                    ))}
+                </div>
+
+
+
+
+                <div id="imagePreview" className="preview-container"></div>
+                <div>
+                    {loading ? <LoadingBtn /> : <button className="btn btn-primary mt-2 mb-3" onClick={handleUploadImageToServer}  >Next</button>
+                    }
+                </div>
+            </div>
         </>
     )
 }
