@@ -5,10 +5,7 @@ import LoadingBtn from "./LoadingBtn";
 import SpinnerWhite from "./SpinnerWhite";
 
 export default function ImageUpload(props) {
-    const [loading, setLoading] = useState(false)
-    // const [choosenFiles, setChoosenFiles] = useState([])
-    console.log("this is the token in imageUploadpage", props.token)
-
+    const [loading, setLoading] = useState(false);
     const [selectedImages, setSelectedImages] = useState([]);
 
     const handleFileChange = (event) => {
@@ -33,6 +30,7 @@ export default function ImageUpload(props) {
         const fileArray = Array.from(file);
         const urls = await uploadImages(fileArray);
         if (urls) {
+            props.setImageList(urls);
             handleFileChange(e);
         }
         console.log(urls);
@@ -99,7 +97,7 @@ export default function ImageUpload(props) {
                         if (response.status === 200) {
                             clearInterval(taskIdInterval);
                             const taskData = await response.json();
-                            console.log("THIS IS THE TASK DATA", taskData);
+                            console.log("THIS IS THE WEBHOOK TASK DATA", taskData);
                         } else {
                             console.log("Task not ready yet");
                         }
@@ -114,42 +112,27 @@ export default function ImageUpload(props) {
 
     return (
         <>
-            <div className="formbold-form-step-2-images-upload"
-                id="formbold-steps-tab-upload-images">
-                {/* <Spinner />
-                <LoadingBtn /> */}
+            <div className="formbold-form-step-2-images-upload" id="formbold-steps-tab-upload-images">
                 <div className="w-100">
-
-                    <label for="multiple-image-upload" className="w-100">
+                    <label htmlFor="multiple-image-upload" className="w-100">
                         <div className="border rounded w-100 p-5">
                             {loading ? <SpinnerComp /> : "Please Choose Your Files to Upload"}
                         </div>
                     </label>
-                    <input type="file" id="multiple-image-upload" style={{ display: "none" }} name="file"
-                        multiple onChange={handleImageUploadToFirebase} ></input>
+                    <input type="file" id="multiple-image-upload" style={{ display: "none" }} name="file" multiple onChange={handleImageUploadToFirebase} />
                 </div>
                 <div className="row mt-3">
                     {selectedImages.map((image, index) => (
-                        <div className="p-2  rounded-4 col-md-4">
-                            <img className="p-2 border rounded"
-                                key={index}
-                                src={image}
-                                alt={`Selected ${index + 1}`}
-                            />
+                        <div className="p-2  rounded-4 col-md-4" key={index}>
+                            <img className="p-2 border rounded" src={image} alt={`Selected ${index + 1}`} />
                         </div>
-
                     ))}
                 </div>
-
-
-
-
                 <div id="imagePreview" className="preview-container"></div>
                 <div>
-                    {loading ? <LoadingBtn /> : <button className="btn btn-primary mt-2 mb-3" onClick={handleUploadImageToServer}  >Next</button>
-                    }
+                    {loading ? <LoadingBtn /> : <button className="btn btn-primary mt-2 mb-3" onClick={handleUploadImageToServer}>Next</button>}
                 </div>
             </div>
         </>
-    )
+    );
 }
