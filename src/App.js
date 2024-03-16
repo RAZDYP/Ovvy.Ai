@@ -34,15 +34,15 @@ function App() {
     <ChakraProvider>
       <div className="App">
         <Navbaar />
-        <div class="container col-md-9">
-          <div class="card w-100 shadow">
+        <div className="container col-md-9">
+          <div className="card w-100 shadow">
             <TokenTab
               handleCreateTokenTab={handleCreateTokenTab}
               handleHaveTokenTab={handleHaveTokenTab}
             />
-            <div class="card">
-              <div class="formbold-main-wrapper">
-                <div class="">
+            <div className="card">
+              <div className="formbold-main-wrapper">
+                <div className="">
                   {createToken && <CreateToken token={token} setToken={setToken} />}
                   {haveToken && <HaveToken token={token} />}
                 </div>
