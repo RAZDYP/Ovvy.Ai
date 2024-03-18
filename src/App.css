@@ -1,22 +1,8 @@
-
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 body {
   font-family: "Inter", sans-serif;
   background-color: #f5f5f5;
-}
-
-.formbold-confirm-btn.active {
-  background-color: #536387;
-  color: white;
-  border-color: #536387;
-}
-
-.formbold-confirm-btn-2.active {
-  background-color: #536387;
-  color: white;
-  border-color: #536387;
 }
 
 .container {
@@ -178,28 +164,6 @@ body {
   padding: 16px;
 }
 
-.formbold-confirm-btn-2 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #ffffff;
-  border: 0.5px solid #dde3ec;
-  border-radius: 5px;
-  font-size: 24px;
-  line-height: 24px;
-  color: #536387;
-  cursor: pointer;
-  padding: 10px 20px;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
-  padding: 16px;
-}
-
-.formbold-confirm-btn.active {
-  background: #6a64f1;
-  color: #ffffff;
-}
-
 .formbold-form-step-1,
 .formbold-form-step-3 {
   display: none;
@@ -246,9 +210,172 @@ body {
   background-color: #6a64f1;
   color: white;
   cursor: pointer;
+  text-align: end;
 }
 
-.formbold-btn:hover {
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+.main-homepage-card {
+  padding: 20px;
+  margin: 0px;
+}
+.main-navbar {
+  padding: 50px;
+}
+.create-token-page-main {
+  padding: 50px;
+}
+.create-token-submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 20px;
+}
+.have-token-button {
+  font-size: 18px;
+  color: #6a64f1;
+  cursor: pointer;
+  text-align: end;
+  border-radius: 10px;
+  border: 1px solid #6a64f1;
+  padding: 8px 12px;
+}
+.upload-image-text {
+  font-size: 30px;
+  font-weight: 500;
+}
+.confirmation-text {
+  font-size: 22px;
+  font-style: italic;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* make the design responsive */
+/* when the width is less than 540px then make it   */
+
+@media (width < 760px) {
+  .formbold-confirm-btn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: #ffffff;
+    border: 0.5px solid #dde3ec;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #536387;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+  }
+  .main-logo {
+    width: 100px;
+  }
+  .create-token-page-main {
+    padding: 30px;
+  }
+  .formbold-form-label {
+    color: #07074d;
+    font-weight: 500;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .create-token-submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+  }
+
+  .formbold-steps {
+    padding-bottom: 18px;
+    margin-bottom: 35px;
+    border-bottom: 1px solid #dde3ec;
+  }
+
+  .formbold-steps ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+
+  .formbold-steps li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #536387;
+  }
+
+  .formbold-steps li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dde3ec;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #536387;
+  }
+  .have-token-button {
+    font-size: 14px;
+    color: #6a64f1;
+    cursor: pointer;
+    text-align: end;
+    border-radius: 6px;
+    border: 1px solid #6a64f1;
+    padding: 4px 10px;
+  }
+  .upload-image-text {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .confirmation-text {
+    font-size: 20px;
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}
+
+@media (width < 550px) {
+  .have-token-button {
+    font-size: 10px;
+    color: #6a64f1;
+    cursor: pointer;
+    text-align: end;
+    border-radius: 4px;
+    border: 1px solid #6a64f1;
+    padding: 0.5px 4px;
+  }
+  .create-token-page-main {
+    padding: 16px;
+  }
+  .formbold-steps li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dde3ec;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 24px;
+    color: #536387;
+  }
+  .upload-image-text {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .confirmation-text {
+    font-size: 16px;
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}

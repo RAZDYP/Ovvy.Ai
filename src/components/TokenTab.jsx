@@ -3,7 +3,7 @@ import React from "react";
 export default function TokenTab(props) {
     return (
         <>
-            <div className="form-buttons">
+            <div className="form-buttons mb-4">
                 <button className="formbold-confirm-btn " id="create-token-btn"
                     onClick={props.handleCreateTokenTab}>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@ export default function TokenTab(props) {
                     </svg>
                     Create Token
                 </button>
-                <button className="formbold-confirm-btn-2" onClick={props.handleHaveTokenTab}>
+                <button className="formbold-confirm-btn" onClick={props.handleHaveTokenTab}>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
                         <g clip-path="url(#clip0_1667_1314)">
