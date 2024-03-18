@@ -1,52 +1,74 @@
 import React, { useEffect, useState } from "react";
+import SpinnerComp from "./SpinnerComp";
 
 export default function Confirmation(props) {
 
-    const [taskStatus, setTaskStatus] = useState([])
+    const [taskData, setTaskData] = useState([])
+    const [imageUrls, setImageUrls] = useState()
+    const [succesfullCount, setSuccesfullCount] = useState()
+    const [failedCount, setFailedCount] = useState()
+    const [folderId, setFolderId] = useState()
+    const [loading, setLoading] = useState(false)
+
 
     useEffect(() => {
-        const handleGetStatus = async () => {
-            await fetch('http://34.138.136.100:8004/tasks/' + props.taskId[0], {
-                method: 'GET',
-                headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + props.token,
-                },
-            }).then(response => response.json()).then(statusData => {
-                console.log('Task-id-status-data', statusData)
-                // requestStatus = StatusData.batch_task_status;
-                setTaskStatus(statusData.batch_task_status)
-            }).catch(err => {
-                console.log(err)
-            })
+        setLoading(true)
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://34.138.136.100:3000/data/' + props.taskId, {
+                    method: 'GET',
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                const data = await response.json();
+                setTaskData(data);
+                setImageUrls(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')))
+                setSuccesfullCount(data.embeds[0].fields[1].value)
+                setFailedCount(data.embeds[0].fields[2].value)
+                setFolderId(data.embeds[0].fields[4].value)
+                setLoading(false)
+            }
+            catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false)
+            }
         }
-
-        handleGetStatus()
+        fetchData();
     }, [])
+
+
+
 
     return (
         <>
             <div className="formbold-form-step-2">
                 <div className="formbold-step-2-notifications" id="formbold-steps-tab-comfirmation">
                     <div className="w-100 d-flex align-items-center justify-content-between">
-                        <div className="col-md-9">
-                            <div className="card shadow">
-                                <div className="card-body">
-                                    <img src="https://ovvy.ai/frontend/images/ovvy-logo.svg" alt="Ovvy Logo"
-                                        width="150" height="100"></img>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div>
-                            <button className="btn btn-primary">Task 1</button>
+                        <div className="col-md-8 row p-3">
+                            {imageUrls && imageUrls.map((url) => {
+                                return (
+                                    <div className=" border rounded p-2">
+                                        {loading ? <div style={{ zIndex: "5", position: "absolute", top: "50%", left: "50%" }}>
+                                            <SpinnerComp />
+                                        </div> : <img src={url} alt="Ovvy Logo" ></img>}
+                                    </div>
+                                )
+                            })}
 
                         </div>
-                        <div className="col-md-2">
-
+                        <div className="col-md-4 p-3 " style={{ textAlign: "left", fontSize: "18px" }}>
+                            <p className="mb-4">Successful count :<b>{succesfullCount}</b> </p>
+                            <p className="mb-4">Failed count : <b>{failedCount}</b>
+                            </p>
+                            <p className="mb-4">Folder ID : <b>{folderId}</b>
+                            </p>
+                            <p className="mb-4">
+                                Task ID :<b>{props.taskId}</b>
+                            </p>
                         </div>
+
 
                     </div>
                 </div>

@@ -16,9 +16,9 @@ export default function Navbaar() {
     const [succesfullCount, setSuccesfullCount] = useState()
     const [failedCount, setFailedCount] = useState()
     const [folderId, setFolderId] = useState()
+
     const [taskId, setTaskId] = useState()
 
-    // make a call to get data from the server and set it to the state
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -70,7 +70,7 @@ export default function Navbaar() {
             <nav className="navbar  navbar-light bg-light p-4">
                 <div className="container-fluid d-flex align-items-center justify-content-between">
                     <img src="https://ovvy.ai/frontend/images/ovvy-logo.svg" alt="Ovvy Logo" width="250" height="100"></img>
-                    <button variant="primary" onClick={handleShow}>
+                    <button className="btn btn-primary" onClick={handleShow}>
                         Launch demo modal
                     </button>
                 </div>

@@ -60,6 +60,7 @@ export default function ImageUpload(props) {
 
 
     const handleUploadImageToServer = async () => {
+        setLoading(true);
         try {
             const response = await fetch('http://34.138.136.100:8004/tasks', {
                 method: 'POST',
@@ -98,8 +99,12 @@ export default function ImageUpload(props) {
                             clearInterval(taskIdInterval);
                             const taskData = await response.json();
                             console.log("THIS IS THE WEBHOOK TASK DATA", taskData);
+                            setLoading(false);
+                            props.handleNextStep();
+
                         } else {
                             console.log("Task not ready yet");
+                            setLoading(false);
                         }
                     }, 5000)
                 }
@@ -119,7 +124,7 @@ export default function ImageUpload(props) {
                             {loading ? <SpinnerComp /> : "Please Choose Your Files to Upload"}
                         </div>
                     </label>
-                    <input type="file" id="multiple-image-upload" style={{ display: "none" }} name="file" multiple onChange={handleImageUploadToFirebase} />
+                    <input type="file" accept=".jpg" id="multiple-image-upload" style={{ display: "none" }} name="file" multiple onChange={handleImageUploadToFirebase} />
                 </div>
                 <div className="row mt-3">
                     {selectedImages.map((image, index) => (
