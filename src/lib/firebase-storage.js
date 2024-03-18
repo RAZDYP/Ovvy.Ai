@@ -24,7 +24,7 @@ const storage = getStorage();
 
 const uploadImages = async (files) => {
   const promises = files.map(async (file) => {
-    const storageRef = ref(storage, 'images/', file.name);
+    const storageRef = ref(storage, 'images/' + file.name);
     const snapshot = await uploadBytes(storageRef, file);
     return getDownloadURL(snapshot.ref);
   });
