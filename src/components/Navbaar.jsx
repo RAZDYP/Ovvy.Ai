@@ -8,17 +8,19 @@ import SpinnerComp from "./SpinnerComp";
 export default function Navbaar() {
     const [loading, setLoading] = useState(true)
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [fullscreen, setFullscreen] = useState(true);
     const [taskData, setTaskData] = useState([])
     const [imageUrls, setImageUrls] = useState()
     const [succesfullCount, setSuccesfullCount] = useState()
     const [failedCount, setFailedCount] = useState()
     const [folderId, setFolderId] = useState()
-
+    
     const [taskId, setTaskId] = useState()
+    
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
+    console.log("this is show: ", show)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -77,7 +79,9 @@ export default function Navbaar() {
 
             </nav>
             {/* modal content */}
-            <Modal show={show} fullscreen={fullscreen} onHide={handleClose} style={{ fontFamily: "verdana" }}>
+            {
+                show && (
+            <Modal show={true} fullscreen={fullscreen} onHide={handleClose} style={{ fontFamily: "verdana" }}>
                 <Modal.Header closeButton>
                     <Modal.Title>View All Tasks Status and Details</Modal.Title>
                 </Modal.Header>
@@ -136,6 +140,8 @@ export default function Navbaar() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+                )
+            }
         </>
     )
 }
