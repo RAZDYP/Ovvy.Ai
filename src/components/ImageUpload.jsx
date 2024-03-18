@@ -119,6 +119,7 @@ export default function ImageUpload(props) {
         <>
             <div className="formbold-form-step-2-images-upload" id="formbold-steps-tab-upload-images">
                 <div className="w-100">
+                    <p className="upload-image-text" style={{ textAlign: "center" }}>Upload Images</p>
                     <label htmlFor="multiple-image-upload" className="w-100">
                         <div className="border rounded w-100 p-5">
                             {loading ? <SpinnerComp /> : "Please Choose Your Files to Upload"}

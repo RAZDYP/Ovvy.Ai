@@ -5,25 +5,25 @@ export default function HaveTokenTabs(props) {
         <>
             <div className="formbold-steps ">
                 <ul className="formbold-steps-tabs">
-                    <li className="formbold-step-menu1 active">
+                    <li className="formbold-step-menu1 active have-token-buttons">
                         <span>1</span>
                         <button value="formbold-steps-tab-authenticate "
-                            className="btn btn-outline-primary" onclick="handleHaveTokenTab()">
+                            className=" have-token-button" >
                             Authenticate
                         </button>
                     </li>
-                    <li className="formbold-step-menu2">
+                    <li className="formbold-step-menu2 active">
                         <span>2</span>
                         <button value="formbold-steps-tab-upload-images"
-                            className="btn  btn-outline-primary" onclick="handleHaveTokenTab()">
-                            Upload Images
+                            className="have-token-button" >
+                            Upload
                         </button>
                     </li>
-                    <li className="formbold-step-menu3">
+                    <li className="formbold-step-menu3 active">
                         <span>3</span>
                         <button value="formbold-steps-tab-comfirmation"
-                            className="btn  btn-outline-primary" onclick="handleHaveTokenTab()">
-                            Confirmation/Notification
+                            className="have-token-button" >
+                            Confirmation
                         </button>
                     </li>
                 </ul>

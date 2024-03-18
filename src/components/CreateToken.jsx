@@ -42,18 +42,18 @@ export default function CreateToken(props) {
 
     return (
         <>
-            <div className="formbold-form-step-1 active">
+            <div className="">
                 <div>
-                    <div className="w-100 col-md-12 d-flex align-items-center justify-content-between">
-                        <div style={{ textAlign: "left" }} className="col-md-4">
+                    <div className="w-100 col-md-12 row align-items-center justify-content-between">
+                        <div style={{ textAlign: "left" }} className="col-md-4 mb-3">
                             <label for="business_id" className="formbold-form-label ">
                                 Business Id
                             </label>
                             <input type="text" name="business_id" placeholder="J20djsjs" id="business_id" value={bussinessId}
                                 onChange={(e) => setBussinessId(e.target.value)}
-                                className="form-control p-2" style={{ fontSize: "large" }} />
+                                className="form-control" style={{ fontSize: "large" }} />
                         </div>
-                        <div style={{ textAlign: "left" }} className="col-md-4 me-3 ms-3">
+                        <div style={{ textAlign: "left" }} className="col-md-4 mb-3">
                             <label for="business_api_key" className="formbold-form-label">
                                 Business API Key
                             </label>
@@ -61,7 +61,7 @@ export default function CreateToken(props) {
                                 onChange={(e) => setBussinessApiKey(e.target.value)}
                                 id="business_api_key" className="form-control p-2" style={{ fontSize: "large" }} />
                         </div>
-                        <div style={{ textAlign: "left" }} className="col-md-4">
+                        <div style={{ textAlign: "left" }} className="col-md-4 mb-3">
                             <label for="secret_key" className="formbold-form-label">
                                 Secret Key
                             </label>
@@ -70,8 +70,8 @@ export default function CreateToken(props) {
                                 className="form-control p-2" style={{ fontSize: "large" }} />
                         </div>
                     </div>
-                    <div className="formbold-form-btn-wrapper ">
-                        <button className="formbold-btn create-token-submit-button" onClick={handleCreateToken}>
+                    <div className="create-token-submit-button w-100 mt-2">
+                        <button className="formbold-btn " onClick={handleCreateToken}>
                             {loading ? <SpinnerWhite /> : <div className="d-flex align-items-center justify-content-between">
                                 Create Token
                                 <svg width="20" height="20" viewBox="0 0 16 16" fill="none"
@@ -88,26 +88,24 @@ export default function CreateToken(props) {
                                     </defs>
                                 </svg>
                             </div>}
+                        </button>
+                    </div>
 
+                </div>
+                <div className="copy-token-btn-content w-100">
+                    <div className="mt-4 d-flex align-items-center justify-content-between ">
+                        <input id="access-token-copy" className="fw-semibold me-1 form-control"
+                            value={props.token}>
+                        </input>
 
+                        <button className="btn ms-1 rounded fw-bold bg-light  d-flex align-items-center"
+                            onClick={handleCopyText}>
+                            <img className="me-3"
+                                src="https://uxwing.com/wp-content/themes/uxwing/download/file-and-folder-type/copy-icon.png"
+                                alt="Copy" width="20" height="20"></img>
+                            Copy
                         </button>
 
-                    </div>
-                </div>
-                <div className="copy-token-btn-content">
-                    <div className="mt-4 mb-5 d-flex align-items-center justify-content-between ">
-                        <input id="access-token-copy" className="fw-semibold col-md-10"
-                            style={{ textAlign: "left", fontSize: "large" }} value={props.token}>
-                        </input>
-                        <div>
-                            <button className="btn  rounded fw-bold bg-light  d-flex align-items-center"
-                                onClick={handleCopyText}>
-                                <img className="me-3"
-                                    src="https://uxwing.com/wp-content/themes/uxwing/download/file-and-folder-type/copy-icon.png"
-                                    alt="Copy" width="20" height="20"></img>
-                                Copy
-                            </button>
-                        </div>
 
                     </div>
                 </div>

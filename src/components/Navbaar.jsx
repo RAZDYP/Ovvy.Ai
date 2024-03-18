@@ -67,12 +67,14 @@ export default function Navbaar() {
     }
     return (
         <>
-            <nav className="navbar  navbar-light bg-light p-4">
+            <nav className="navbar shadow navbar-light bg-light main-navbar">
                 <div className="container-fluid d-flex align-items-center justify-content-between">
-                    <img src="https://ovvy.ai/frontend/images/ovvy-logo.svg" alt="Ovvy Logo" width="250" height="100"></img>
-                    <button className="btn btn-primary" onClick={handleShow}>
-                        Launch demo modal
-                    </button>
+                    <div>
+                        <img src="https://ovvy.ai/frontend/images/ovvy-logo.svg" className="main-logo" alt="Ovvy Logo" ></img>
+                    </div>
+                    <Button className="btn btn-primary " onClick={handleShow}>
+                        Task Details
+                    </Button>
                 </div>
 
             </nav>

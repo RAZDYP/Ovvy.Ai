@@ -45,31 +45,24 @@ export default function Confirmation(props) {
         <>
             <div className="formbold-form-step-2">
                 <div className="formbold-step-2-notifications" id="formbold-steps-tab-comfirmation">
-                    <div className="w-100 d-flex align-items-center justify-content-between">
-                        <div className="col-md-8 row p-3">
-                            {imageUrls && imageUrls.map((url) => {
-                                return (
-                                    <div className=" border rounded p-2">
-                                        {loading ? <div style={{ zIndex: "5", position: "absolute", top: "50%", left: "50%" }}>
-                                            <SpinnerComp />
-                                        </div> : <img src={url} alt="Ovvy Logo" ></img>}
-                                    </div>
-                                )
-                            })}
-
-                        </div>
-                        <div className="col-md-4 p-3 " style={{ textAlign: "left", fontSize: "18px" }}>
-                            <p className="mb-4">Successful count :<b>{succesfullCount}</b> </p>
-                            <p className="mb-4">Failed count : <b>{failedCount}</b>
+                    <div className="w-100  ">
+                        <div className=" p-3 " style={{ textAlign: "left", fontSize: "18px" }}>
+                            <p className="confirmation-text">Successful count : <b>{succesfullCount}</b> </p>
+                            <p className="confirmation-text">Failed count : <b>{failedCount}</b>
                             </p>
-                            <p className="mb-4">Folder ID : <b>{folderId}</b>
+                            <p className="confirmation-text">Folder ID : <b>{folderId}</b>
                             </p>
-                            <p className="mb-4">
+                            <p className="confirmation-text">
                                 Task ID :<b>{props.taskId}</b>
                             </p>
                         </div>
-
-
+                        <div className="row p-3">
+                            {imageUrls && imageUrls.map((url, index) => {
+                                return (
+                                    <img src={url} className="border col-md-4 p-2" alt="Ovvy Logo" ></img>
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>
