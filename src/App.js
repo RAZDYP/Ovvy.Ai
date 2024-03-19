@@ -35,7 +35,7 @@ function App() {
       <div className="App">
         <Navbaar />
         <div className="d-flex align-items-center justify-content-center ">
-          <div className="card border-0 w-100  shadow main-homepage-card">
+          <div className="card border-0 w-100   main-homepage-card">
             <TokenTab
               handleCreateTokenTab={handleCreateTokenTab}
               handleHaveTokenTab={handleHaveTokenTab}

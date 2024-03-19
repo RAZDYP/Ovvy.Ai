@@ -32,6 +32,7 @@ export default function Navbaar() {
                     },
                 })
                 const data = await response.json();
+                console.log(data);
                 setTaskData(data);
                 // set TASK IDS IN AN ARRAY TO BE USED IN THE MODAL
                 const taskIds = data.map((task) => task.task_id);
@@ -85,61 +86,59 @@ export default function Navbaar() {
                 show && (
             <Modal show={true} fullscreen={fullscreen} onHide={handleClose} style={{ fontFamily: "verdana" }}>
                 <Modal.Header closeButton>
-                    <Modal.Title>View All Tasks Status and Details</Modal.Title>
+                    <Modal.Title ><p className="m-0 modal-main-header">View All Tasks Status and Details</p></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className="w-100 py-2 d-flex ">
-                        <div className="col-md-2 d-flex flex-column  p-2 " style={{ overflowY: "scroll", height: "72vh" }}>
-                            {taskData.map((task) => {
+                <Modal.Body className="p-0 ">
+                    <div className="w-100 modal-body-main d-flex justify-content-between">
+                        <div className="task-button-list w-25" style={{ overflowY: "scroll", height: "72vh" }}>
+                            {taskData.map((task, index) => {
                                 return (
-                                    <div className="col-md-12 p-2 " >
-                                        <button key={task.id} className="btn btn-outline-primary border-2 mb-3" style={{ fontSize: "14px" }}
+                                    <div className=" p-2 w-100 " >
+                                        <button key={task.id} className=" w-100 task-details-button    mb-3" style={{ fontFamily: "verdana" }}
                                             onClick={() => fetchImages(task.id)}
                                         >
-                                            {task.id}
+                                            Task {index + 1}
                                         </button>
                                     </div>
                                 )
                             }
                             )}
                         </div>
-                        <div className="col-md-10 d-flex  m-3">
-                            <div className="col-md-8 pe-2 row">
-                                <h5 className="px-3">The Processed Images for the Task ID <strong className="text-primary">{loading ? <SpinnerComp /> : taskId} </strong> are displayed below </h5>
-                                {imageUrls && imageUrls.map((url) => {
-                                    return (
-                                        <div className="col-md-4 p-2">
-                                            {loading ? <div style={{ zIndex: "5", position: "absolute", top: "50%", left: "50%" }}>
-                                                <SpinnerComp />
-                                            </div> : <img src={url} alt="Ovvy Logo" height="150" width="250" ></img>}
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                            <div className="col-md-4">
-                                <h3>Task Details</h3>
-                                <hr></hr>
-                                <div>
-                                    <p className="mb-4">Successful count : {succesfullCount}</p>
-                                    <p className="mb-4">Failed count : {failedCount}
-                                    </p>
-                                    <p className="mb-4">Folder ID : {folderId}
-                                    </p>
-                                    <p className="mb-4">
-                                        Task ID : {taskId}
-                                    </p>
+                        <div className="w-75 d-flex justify-content-center  px-3" style={{ overflowY: "scroll", height: "72vh" }}>
+                            <div className=" mt-2 w-100 row">
+                                <div className="col-md-3  p-2 ">
+                                    <h3 className="task-detail-header">Task Details</h3>
+                                    <hr></hr>
+                                    <div>
+                                        <p className="task-status-text">Successful count : {succesfullCount}</p>
+                                        <p className="task-status-text">Failed count : {failedCount}
+                                        </p>
+                                        <p className="task-status-text">Folder ID : {folderId}
+                                        </p>
+                                        <p className="task-status-text">
+                                            Task ID : {taskId}
+                                        </p>
+                                    </div>
                                 </div>
+                                {imageUrls && imageUrls.map((url) =>
+                                (
+                                    <div className="col-md-3  p-2">
+                                        <img src={url} className="border rounded p-2" alt="Ovvy Logo"  ></img>
+                                    </div>
+
+                                ))}
+
+                                {/* <h5 className="px-3">The Processed Images for the Task ID <strong className="text-primary">{loading ? <SpinnerComp /> : taskId} </strong> are displayed below </h5> */}
                             </div>
+
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                <Modal.Footer className="p-0">
+                    <button onClick={handleClose} className=" border rounded modal-close-button">
                         Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
+                    </button>
+
                 </Modal.Footer>
             </Modal>
                 )

@@ -13,7 +13,6 @@ body {
 
 .card {
   background-color: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 70px;
   margin: 50px;
   border-radius: 8px;
@@ -247,11 +246,43 @@ body {
   font-style: italic;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.task-details-button {
+  font-size: 18px;
+  color: #6a64f1;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #6a64f1;
+  padding: 8px 12px;
+}
+.modal-body-main {
+  padding: 20px;
+}
+.task-status-text {
+  font-size: 14px;
+  font-weight: 500;
+  font-style: italic;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.task-detail-header {
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.modal-close-button {
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  padding: 4px 12px;
+  background-color: grey;
+  color: white;
+}
 
 /* make the design responsive */
 /* when the width is less than 540px then make it   */
 
-@media (width < 760px) {
+@media (width < 770px) {
   .formbold-confirm-btn {
     display: flex;
     align-items: center;
@@ -265,6 +296,9 @@ body {
     padding: 5px 10px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+  }
+  .modal-body-main {
+    padding: 6px;
   }
   .main-logo {
     width: 100px;
@@ -341,6 +375,15 @@ body {
     font-style: italic;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
+  .task-details-button {
+    font-size: 14px;
+    color: #6a64f1;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #6a64f1;
+    padding: 4px 10px;
+  }
 }
 
 @media (width < 550px) {
@@ -377,5 +420,17 @@ body {
     font-size: 16px;
     font-style: italic;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .task-details-button {
+    font-size: 12px;
+    color: #6a64f1;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #6a64f1;
+    padding: 3px 7px;
+  }
+  .modal-main-header {
+    font-size: 14px;
   }
 }
