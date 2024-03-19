@@ -15,7 +15,7 @@ export default function Confirmation(props) {
         setLoading(true)
         const fetchData = async () => {
             try {
-                const response = await fetch('http://34.138.136.100:3000/data/' + props.taskId, {
+                const response = await fetch('https://ovvyml.com/api/data/' + props.taskId, {
                     method: 'GET',
                     headers: {
                         'accept': 'application/json',

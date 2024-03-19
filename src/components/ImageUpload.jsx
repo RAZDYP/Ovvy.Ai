@@ -41,7 +41,7 @@ export default function ImageUpload(props) {
     const checkTaskStatus = async (taskId) => {
         console.log("This is the token in checkTaskStatus", props.token, "This is the task in checkstatus", taskId)
         try {
-            const response = await fetch('http://34.138.136.100:8004/tasks/' + taskId, {
+            const response = await fetch('https://ovvyml.com/api/tasks/' + taskId, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
@@ -62,7 +62,7 @@ export default function ImageUpload(props) {
     const handleUploadImageToServer = async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://34.138.136.100:8004/tasks', {
+            const response = await fetch('https://ovvyml.com/api/tasks', {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
@@ -86,7 +86,7 @@ export default function ImageUpload(props) {
                 if (taskStatusData.batch_task_status === "SUCCESS") {
                     clearInterval(interval);
                     const taskIdInterval = setInterval(async () => {
-                        const response = await fetch('http://34.138.136.100:3000/data/' + taskId, {
+                        const response = await fetch('https://ovvyml.com/api/data/' + taskId, {
                             method: 'GET',
                             headers: {
                                 'accept': 'application/json',
