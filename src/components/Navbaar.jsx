@@ -32,7 +32,7 @@ export default function Navbaar() {
                     },
                 })
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
                 setTaskData(data);
                 // set TASK IDS IN AN ARRAY TO BE USED IN THE MODAL
                 const taskIds = data.map((task) => task.task_id);
@@ -55,8 +55,8 @@ export default function Navbaar() {
                 },
             })
             const data = await response.json();
-            console.log(typeof (data.embeds[0].fields[3].value));
-            console.log(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')));
+            // console.log(typeof (data.embeds[0].fields[3].value));
+            // console.log(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')));
             setImageUrls(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')))
             setSuccesfullCount(data.embeds[0].fields[1].value)
             setFailedCount(data.embeds[0].fields[2].value)

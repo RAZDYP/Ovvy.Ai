@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SpinnerComp from "./SpinnerComp";
+import Navbaar from "./Navbaar";
 
-export default function Confirmation(props) {
+export default function SingleTaskDetails(props) {
 
     const [taskData, setTaskData] = useState([])
     const [imageUrls, setImageUrls] = useState()
@@ -14,8 +15,9 @@ export default function Confirmation(props) {
     useEffect(() => {
         setLoading(true)
         const fetchData = async () => {
+            console.log("This is the task id in single task details: ", localStorage.getItem('task_id'))
             try {
-                const response = await fetch('https://ovvyml.com/api/data/' + props.taskId, {
+                const response = await fetch('http://34.138.136.100:3000/data/' + localStorage.getItem('task_id'), {
                     method: 'GET',
                     headers: {
                         'accept': 'application/json',
@@ -24,6 +26,7 @@ export default function Confirmation(props) {
                 })
                 const data = await response.json();
                 setTaskData(data);
+                console.log("This is the task data: ", data)
                 setImageUrls(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')))
                 setSuccesfullCount(data.embeds[0].fields[1].value)
                 setFailedCount(data.embeds[0].fields[2].value)
@@ -43,6 +46,7 @@ export default function Confirmation(props) {
 
     return (
         <>
+            <Navbaar />
             <div className="formbold-form-step-2">
                 <div className="formbold-step-2-notifications" id="formbold-steps-tab-comfirmation">
                     <div className="w-100  ">

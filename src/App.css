@@ -279,6 +279,63 @@ body {
   color: white;
 }
 
+/* LOGIN PAGE */
+.login-page-full {
+  background-image: url("https://ovvy.ai/_next/static/media/sigin-bg.32364746.png");
+  height: 100vh;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.login-page-card {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+.log-in-btn {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  padding: 6px 60px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #71c0fc, #41a7f5);
+}
+.register-btn {
+  font-size: 20px;
+  font-weight: 500;
+  color: #41a7f5;
+  background-color: #ffffff;
+  border: #41a7f5 2px solid;
+
+  padding: 6px 60px;
+  border-radius: 10px;
+}
+.forget-password-text {
+  text-align: end;
+}
+
+/* IMAGE UPLOAD FULL PAGE */
+
+.image-upload-full {
+  background-image: url("https://ovvy.ai/_next/static/media/sigin-bg.32364746.png");
+  height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.image-upload-main-component {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  text-align: center;
+  margin-top: 40px;
+}
+
 /* make the design responsive */
 /* when the width is less than 540px then make it   */
 

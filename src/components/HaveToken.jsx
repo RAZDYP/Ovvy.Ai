@@ -3,7 +3,7 @@ import { useState } from 'react';
 import HaveTokenTabs from "./HaveTokenTabs";
 import EnterToken from "./EnterToken";
 import ImageUpload from "./ImageUpload";
-import Confirmation from "./Confirmation";
+import Confirmation from "./SingleTaskDetails";
 
 export default function HaveToken(props) {
 
