@@ -46,10 +46,9 @@ function App() {
   const handleLogin = () => {
     if (username === 'admin' && password === 'admin') {
       setIsLoggedIn(true)
+      window.location.href = '/upload-images'
     }
   }
-  console.log(isLoggedIn)
-
 
   return (
     <Router>

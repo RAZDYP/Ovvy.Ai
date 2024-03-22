@@ -145,7 +145,7 @@ export default function ImageUpload(props) {
                     'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 },
                 body: JSON.stringify({
-                    images: props.imageList,
+                    images: imageList,
                     folder_id: "1234",
                     strength: 0.08
                 }),

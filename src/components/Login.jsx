@@ -11,7 +11,7 @@ function Login(props) {
                 <div className='w-100 login-page-container'>
                     <div className=' mb-3 col-md-6 login-page-card '>
                         <h2> Sign in </h2>
-                        <form style={{ textAlign: "left" }} className='mb-3'>
+                        <div style={{ textAlign: "left" }} className='mb-3'>
                             <div className="form-group mb-4" >
                                 <label className='mb-2'>Email </label>
                                 <input type="text" value={props.username} onChange={(e) => props.setUsername(e.target.value)} className="form-control" id="exampleInputEmail1" placeholder='email' />
@@ -21,7 +21,7 @@ function Login(props) {
                                 <input type="password" value={props.password} onChange={(e) => props.setPassword(e.target.value)} className="form-control large " id="exampleInputPassword1" placeholder='Password' />
                             </div>
                             <button type="submit" onClick={props.handleLogin} className="log-in-btn border-0 w-100">Log in</button>
-                        </form>
+                        </div>
                         <div className='w-100 mb-3 forget-password-text'>
                             <a href=''><p>Forgot your password?</p></a>
                         </div>
