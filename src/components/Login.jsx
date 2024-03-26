@@ -32,8 +32,8 @@ function Login(props) {
                 {/* <Navbaar /> */}
                 <div className='w-100 login-page-container'>
                     <div className=' mb-3 col-md-6 login-page-card '>
-                        <h2> Log in </h2>
-                        <form style={{ textAlign: "left" }} className='mb-3'>
+                        <h2> Sign in </h2>
+                        <div style={{ textAlign: "left" }} className='mb-3'>
                             <div className="form-group mb-4" >
                                 <label className='mb-2'>Email </label>
                                 <input
@@ -53,9 +53,11 @@ function Login(props) {
                                     className="form-control large "
                                     placeholder='Password' />
                             </div>
-                            <button type="submit" onClick={handleLogin} className="log-in-btn border-0 w-100">Log in</button>
-                        </form>
-
+                            <button type="submit" onClick={props.handleLogin} className="log-in-btn border-0 w-100">Log in</button>
+                        </div>
+                        <div className='w-100 mb-3 forget-password-text'>
+                            <a href=''><p>Forgot your password?</p></a>
+                        </div>
                         <p>Don't have an account?</p>
                         <Link to='/signup'>
                             <button className='register-btn w-100 mb-3'>Register</button>
