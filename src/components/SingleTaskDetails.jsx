@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SpinnerComp from "./SpinnerComp";
 import Navbaar from "./Navbaar";
+// import uuid
+import { v4 as uuidv4 } from 'uuid';
 
 export default function SingleTaskDetails(props) {
 
@@ -32,6 +34,30 @@ export default function SingleTaskDetails(props) {
                 setFailedCount(data.embeds[0].fields[2].value)
                 setFolderId(data.embeds[0].fields[4].value)
                 setLoading(false)
+                await fetch(`http://localhost:3001/tasks/${data.id}/image-list`, {
+                    method: 'POST',
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        images: data.embeds[0].fields[6].value.map((image, index) => {
+                            return {
+                                image_id: uuidv4(),
+                                input_url: image,
+                                output_url: JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"'))[index],
+                                status: 'success',
+                                feedback: '',
+                                ratings: 0
+                            }
+                        }),
+                        successfull_count: data.embeds[0].fields[1].value,
+                        failed_count: data.embeds[0].fields[2].value,
+                        folder_id: data.embeds[0].fields[5].value,
+                    })
+                }).then(response => response.json()).then(data => {
+                    console.log(data)
+                })
             }
             catch (error) {
                 console.error('Error fetching data:', error);
@@ -63,7 +89,7 @@ export default function SingleTaskDetails(props) {
                         <div className="row p-3">
                             {imageUrls && imageUrls.map((url, index) => {
                                 return (
-                                    <img src={url} className="border col-md-4 p-2" alt="Ovvy Logo" ></img>
+                                    <img key={index} src={url} className="border col-md-4 p-2" alt="Ovvy Logo" ></img>
                                 )
                             })}
                         </div>

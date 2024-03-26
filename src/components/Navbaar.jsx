@@ -35,7 +35,7 @@ export default function Navbaar() {
                             <button className="position-relative border-0 bg-transparent me-3" style={{ fontFamily: "verdana" }}>
                                 Archive
                                 <Image src={notificationIcon} className="notification-icon ms-2" alt="notification icon" width={20} />
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontFamily: "verdana" }}>
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontFamily: "verdana" }}>
                                     9+
                                 </span>
                             </button>

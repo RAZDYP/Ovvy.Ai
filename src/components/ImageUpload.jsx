@@ -18,7 +18,7 @@ export default function ImageUpload(props) {
     const [imageList, setImageList] = useState([]);
 
     useEffect(() => {
-        const CheckValidyAndCreateToken = async () => {
+        const checkValidityAndCreateToken = async () => {
             const CheckTokenValidity = async () => {
                 try {
                     const response = await fetch('http://34.138.136.100:8004/tasks/' + taskIdHardCoded, {
@@ -30,6 +30,7 @@ export default function ImageUpload(props) {
                         },
                     })
                     const data = await response.json();
+                    console.log("dataa: ", data);
                     if (data.detail === "Could not validate credentials") {
                         return { success: false, data: data };
                     }
@@ -65,6 +66,7 @@ export default function ImageUpload(props) {
                 })
             }
             const tokenValidityResponse = await CheckTokenValidity()
+            console.log("This is the token validity response", tokenValidityResponse)
             if (tokenValidityResponse.success) {
                 console.log("Token is valid")
                 console.log("this is the token", token)
@@ -75,11 +77,10 @@ export default function ImageUpload(props) {
                 handleCreateToken()
             }
         }
-        CheckValidyAndCreateToken();
+        checkValidityAndCreateToken();
 
 
-    },
-        []
+    }, []
     )
 
     const handleFileChange = (event) => {
@@ -151,7 +152,7 @@ export default function ImageUpload(props) {
                 }),
             })
             const data = await response.json();
-            console.log('task_id', data)
+            console.log('iinput url', data)
             const taskId = data.task_id;
             props.setTaskId(taskId);
             localStorage.setItem('task_id', taskId);
@@ -173,7 +174,7 @@ export default function ImageUpload(props) {
                         if (response.status === 200) {
                             clearInterval(taskIdInterval);
                             const taskData = await response.json();
-                            console.log("THIS IS THE WEBHOOK TASK DATA", taskData);
+                            console.log("output url", taskData);
                             window.location.href = "/task-details";
                             setLoading(false);
 

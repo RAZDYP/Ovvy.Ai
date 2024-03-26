@@ -27,6 +27,10 @@ function AllTasksDetails() {
     const [taskId, setTaskId] = useState()
     const [inputImageUrls, setInputImageUrls] = useState([])
 
+
+    const [feedback, setFeedback] = useState('')
+    const [ratings, setRatings] = useState(0)
+
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true)
@@ -55,7 +59,7 @@ function AllTasksDetails() {
     const fetchImages = async (taskId) => {
         setLoading(true)
         try {
-            const response = await fetch('http://34.138.136.100:3000/data/' + taskId, {
+            const response = await fetch('http://localhost:3001/tasks/' + taskId, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
@@ -63,15 +67,23 @@ function AllTasksDetails() {
                 },
             })
             const data = await response.json();
-            console.log(data);
+            console.log("this is the image urls", data.image_list)
+
+            setImageUrls(data.image_list)
+            setSuccesfullCount(data.successfull_count)
+            setFailedCount(data.failed_count)
+            setFolderId(data.folder_id)
+            // setInputImageUrls(data.image_list[0].input_url)
+            setTaskId(data.task_id)
+
             // console.log(typeof (data.embeds[0].fields[3].value));
             // console.log(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')));
-            setImageUrls(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')))
-            setSuccesfullCount(data.embeds[0].fields[1].value)
-            setFailedCount(data.embeds[0].fields[2].value)
-            setFolderId(data.embeds[0].fields[4].value)
-            setInputImageUrls(data.embeds[0].fields[6].value)
-            setTaskId(data.id)
+            // setImageUrls(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')))
+            // setSuccesfullCount(data.embeds[0].fields[1].value)
+            // setFailedCount(data.embeds[0].fields[2].value)
+            // setFolderId(data.embeds[0].fields[4].value)
+            // setInputImageUrls(data.embeds[0].fields[6].value)
+            // setTaskId(data.id)
 
             setLoading(false)
         } catch (error) {
@@ -79,6 +91,30 @@ function AllTasksDetails() {
             setLoading(false)
         }
     }
+
+    const updateFeedbackAndRating = async (taskId, imageId, feedback, rating) => {
+        try {
+            const response = await fetch('http://localhost:3001/' + taskId + '/image/feedback-ratings', {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    image_id: imageId,
+                    feedback: feedback,
+                    rating: rating
+                }),
+            })
+
+            const data = await response.json();
+            console.log(data);
+
+        } catch (error) {
+            console.error('Error updating feedback and rating:', error);
+        }
+    }
+    // console.log(ratings, feedback)
     return (
         <>
             <Navbaar />
@@ -114,47 +150,51 @@ function AllTasksDetails() {
                             </div>
                             <hr></hr>
                         </div>
-                        <div className="w-100 image-compare-main-div">
-                            <div className="col-md-4 p-2 input-image-div">
-                                <h3 className="text-allign">Input Images</h3>
-                                {inputImageUrls && inputImageUrls.map((url) =>
-                                (
-                                    <img src={url} className=" bg-white rounded p-2" alt="Ovvy Logo"  ></img>
-                                ))}
-                            </div>
-                            <div className="col-md-4 p-2 output-image-div">
-                                <h3 className="text-allign  fs-italic">Output Images</h3>
-                                {imageUrls && imageUrls.map((url, index) =>
-                                (
-                                    <img src={url} key={index} className=" bg-white rounded p-2" alt="Ovvy Logo"  ></img>
-                                ))}
-                            </div>
-                            <div className="col-md-3 p-2 feedback-image-div">
-                                {imageUrls && imageUrls.map((url, index) =>
-                                (
-                                    <div>
-                                        <p>Enter you feedback here</p>
-                                        <input type="text" className=" mb-3 form-control" />
-                                        <p className="mb-1">Rate the image</p>
-                                        <select
-                                            className="form-select mb-3"
-                                        >
-                                            <option value={0}>Select rating</option>
-                                            <option value={1}>1</option>
-                                            <option value={2}>2</option>
-                                            <option value={3}>3</option>
-                                            <option value={4}>4</option>
-                                            <option value={5}>5</option>
-                                        </select>
-                                        <button className="update-btn-style">Update</button>
+                        <div className="w-100 d-flex flex-column image-compare-main-div">
+                            {
+                                imageUrls && imageUrls.map((image, index) => {
+                                    return (
+                                        <div className="row">
+                                            <div className="col-md-4 p-2 input-image-div">
+                                                <h3 className="text-allign">Input</h3>
+                                                <img src={image.input_url} className=" bg-white rounded p-2" alt="Ovvy Logo"  ></img>
+                                            </div>
+                                            <div className="col-md-4 p-2 output-image-div">
+                                                <h3 className="text-allign  fs-italic">Output</h3>
+                                                <img src={image.output_url} key={index} className=" bg-white rounded p-2" alt="Ovvy Logo"  ></img>
+                                            </div>
+                                            <div className="col-md-3 p-2 feedback-image-div">
+                                                <div>
+                                                    <p>Enter you feedback here</p>
+                                                    <input
+                                                        type="text"
+                                                        value={image.feedback}
+                                                        onChange={(e) => setFeedback(e.target.value)}
+                                                        className="mb-3 form-control" />
+                                                    <p className="mb-1">Rate the image</p>
+                                                    <select value={image.ratings} key={index} onChange={(e) => setRatings(e.target.value)}
+                                                        className="form-select mb-3"
+                                                    >
+                                                        <option value={0}>Select rating</option>
+                                                        <option value={1}>1</option>
+                                                        <option value={2}>2</option>
+                                                        <option value={3}>3</option>
+                                                        <option value={4}>4</option>
+                                                        <option value={5}>5</option>
+                                                    </select>
+                                                    <button
+                                                        className="update-btn-style"
+
+                                                    >Update</button>
 
 
 
-                                    </div>
-
-                                ))}
-
-                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
 
                         </div>
                     </div>

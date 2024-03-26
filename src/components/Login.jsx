@@ -53,7 +53,7 @@ function Login(props) {
                                     className="form-control large "
                                     placeholder='Password' />
                             </div>
-                            <button type="submit" onClick={props.handleLogin} className="log-in-btn border-0 w-100">Log in</button>
+                            <button type="submit" onClick={handleLogin} className="log-in-btn border-0 w-100">Log in</button>
                         </div>
                         <div className='w-100 mb-3 forget-password-text'>
                             <a href=''><p>Forgot your password?</p></a>
