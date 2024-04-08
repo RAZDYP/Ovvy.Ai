@@ -199,13 +199,21 @@ export default function ImageUpload(props) {
                     <p className="upload-image-text" style={{ textAlign: "center" }}>Upload Images</p>
                     <label htmlFor="multiple-image-upload" className="w-100">
                         <div className="border rounded w-100 p-5">
-                            {loading ? <SpinnerComp /> : "Please Choose Your Files to Upload"}
+                            {loading ? <SpinnerComp /> : 
+                                <>
+                                    <button className="bg-light btn btn-primary text-dark mb-3">Choose Files</button>
+                                    <p>or drag and drop files here</p>
+                                </>
+                            }
                         </div>
                     </label>
                     <input type="file" accept=".jpg" id="multiple-image-upload" style={{ display: "none" }} name="file" multiple onChange={handleImageUploadToFirebase} />
                     <div className="row mt-3">
                         {selectedImages.map((image, index) => (
-                            <img className="p-3 col-md-4 border rounded" key={index} src={image} alt={`Selected ${index + 1}`} />
+                            <div className="col-md-3">
+                                <img className="p-3 border w-100 rounded" key={index} src={image} alt={`Selected ${index + 1}`} />
+                                <button className="btn btn-danger text-align-right mt-3">Delete</button>
+                            </div>
                         ))}
                     </div>
                     <div>

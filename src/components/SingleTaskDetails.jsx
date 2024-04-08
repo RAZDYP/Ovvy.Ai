@@ -54,6 +54,7 @@ export default function SingleTaskDetails(props) {
                         successfull_count: data.embeds[0].fields[1].value,
                         failed_count: data.embeds[0].fields[2].value,
                         folder_id: data.embeds[0].fields[5].value,
+                        kind: 'Task'
                     })
                 }).then(response => response.json()).then(data => {
                     console.log(data)

@@ -67,7 +67,7 @@ function AllTasksDetails() {
                 },
             })
             const data = await response.json();
-            console.log("this is the image urls", data.image_list)
+            console.log("this is the image urls", data)
 
             setImageUrls(data.image_list)
             setSuccesfullCount(data.successfull_count)
@@ -92,18 +92,18 @@ function AllTasksDetails() {
         }
     }
 
-    const updateFeedbackAndRating = async (taskId, imageId, feedback, rating) => {
+    const updateFeedbackAndRating = async (taskId, imageId) => {
         try {
-            const response = await fetch('http://localhost:3001/' + taskId + '/image/feedback-ratings', {
+            const response = await fetch('http://localhost:3001/' + taskId + '/' +  imageId + '/feedback-rating', {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    image_id: imageId,
                     feedback: feedback,
-                    rating: rating
+                    rating: ratings,
+                    kind: "Task"
                 }),
             })
 
@@ -114,7 +114,7 @@ function AllTasksDetails() {
             console.error('Error updating feedback and rating:', error);
         }
     }
-    // console.log(ratings, feedback)
+    console.log(ratings, feedback)
     return (
         <>
             <Navbaar />
@@ -168,11 +168,11 @@ function AllTasksDetails() {
                                                     <p>Enter you feedback here</p>
                                                     <input
                                                         type="text"
-                                                        value={image.feedback}
+                                                        value={feedback}
                                                         onChange={(e) => setFeedback(e.target.value)}
                                                         className="mb-3 form-control" />
                                                     <p className="mb-1">Rate the image</p>
-                                                    <select value={image.ratings} key={index} onChange={(e) => setRatings(e.target.value)}
+                                                    <select value={ratings} key={index} onChange={(e) => setRatings(e.target.value)}
                                                         className="form-select mb-3"
                                                     >
                                                         <option value={0}>Select rating</option>
@@ -184,6 +184,7 @@ function AllTasksDetails() {
                                                     </select>
                                                     <button
                                                         className="update-btn-style"
+                                                        onClick={() => updateFeedbackAndRating(taskId, image.image_id)}
 
                                                     >Update</button>
 
