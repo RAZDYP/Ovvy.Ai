@@ -28,8 +28,8 @@ function AllTasksDetails() {
     const [inputImageUrls, setInputImageUrls] = useState([])
 
 
-    const [feedback, setFeedback] = useState('')
-    const [ratings, setRatings] = useState(0)
+    const [feedbacks, setFeedbacks] = useState()
+    const [ratings, setRatings] = useState()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -75,6 +75,8 @@ function AllTasksDetails() {
             setFolderId(data.folder_id)
             // setInputImageUrls(data.image_list[0].input_url)
             setTaskId(data.task_id)
+            setFeedbacks(data.image_list.map((image) => image.feedback))
+            setRatings(data.image_list.map((image) => image.ratings))
 
             // console.log(typeof (data.embeds[0].fields[3].value));
             // console.log(JSON.parse(data.embeds[0].fields[3].value.replace(/'/g, '"')));
@@ -101,7 +103,7 @@ function AllTasksDetails() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    feedback: feedback,
+                    feedback: feedbacks,
                     rating: ratings,
                     kind: "Task"
                 }),
@@ -114,7 +116,20 @@ function AllTasksDetails() {
             console.error('Error updating feedback and rating:', error);
         }
     }
-    console.log(ratings, feedback)
+    console.log(ratings, feedbacks)
+    
+    const handleUpdateFeedback = (index, value) => {
+        const newFeedbacks = [...feedbacks];
+        newFeedbacks[index] = value;
+        setFeedbacks(newFeedbacks);
+    }
+
+    const handleUpdateRating = (index, value) => {
+        value = parseInt(value);
+        const newRatings = [...ratings];
+        newRatings[index] = value;
+        setRatings(newRatings);
+    }
     return (
         <>
             <Navbaar />
@@ -168,11 +183,13 @@ function AllTasksDetails() {
                                                     <p>Enter you feedback here</p>
                                                     <input
                                                         type="text"
-                                                        value={feedback}
-                                                        onChange={(e) => setFeedback(e.target.value)}
+                                                        value={feedbacks[index]}
+                                                    //    only chnage that index feedback value using setFeedbacks
+                                                        onChange={(e) => handleUpdateFeedback(index, e.target.value)}
+
                                                         className="mb-3 form-control" />
                                                     <p className="mb-1">Rate the image</p>
-                                                    <select value={ratings} key={index} onChange={(e) => setRatings(e.target.value)}
+                                                    <select value={ratings[index]} key={index} onChange={(e) => handleUpdateRating(index, e.target.value)}
                                                         className="form-select mb-3"
                                                     >
                                                         <option value={0}>Select rating</option>
