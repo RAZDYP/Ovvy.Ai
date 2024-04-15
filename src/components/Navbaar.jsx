@@ -26,12 +26,12 @@ export default function Navbaar() {
             <nav className="navbar shadow navbar-light bg-light main-navbar text-white">
                 <div className="container-fluid d-flex align-items-center justify-content-between">
                     <div>
-                        <a href="/upload-images" >
+                        <a href="/" >
                             <img src="https://ovvy.ai/frontend/images/ovvy-logo.svg" className="main-logo" alt="Ovvy Logo" ></img>
                         </a>
                     </div>
                     <div className="col-md-2 d-flex align-items-center justify-content-between">
-                        <a href="/all-task-details" >
+                        <a href="/new-details" >
                             <button className="position-relative border-0 bg-transparent me-3" style={{ fontFamily: "verdana" }}>
                                 Archive
                                 <Image src={notificationIcon} className="notification-icon ms-2" alt="notification icon" width={20} />
