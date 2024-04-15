@@ -14,7 +14,6 @@ import SingleTaskDetails from './components/SingleTaskDetails';
 import AllTasksDetails from './components/AllTasksDetails';
 import SignUp from './components/SignUp';
 import ProtectedRoutes from './services/ProtectedRoutes';
-import NewDetails from './components/NewAllDetails';
 
 
 
@@ -38,7 +37,6 @@ function App() {
           <Route path="/" element={<ImageUpload taskId={taskId} setTaskId={setTaskId} />} />
           <Route path="/task-details" element={<SingleTaskDetails taskId={taskId} />} />
           <Route path="/all-task-details" element={<AllTasksDetails />} />
-          <Route path='/new-details' element={<NewDetails />} />
         </Route>
       </Routes>
     </Router>
