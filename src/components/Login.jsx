@@ -59,10 +59,10 @@ function Login(props) {
                             <a href=''><p>Forgot your password?</p></a>
                         </div>
                         <p>Don't have an account?</p>
-                        <Link to='/signup'>
+                        {/* <Link to='/signup'>
                             <button className='register-btn w-100 mb-3'>Register</button>
 
-                        </Link>
+                        </Link> */}
                         <small className='opacity-75'>Terms of use | Privacy policy</small>
                     </div>
                     <div className='w-100 ' style={{ textAlign: "center" }}>

@@ -6,6 +6,8 @@ import SpinnerWhite from "./SpinnerWhite";
 import { Nav } from "react-bootstrap";
 import Navbaar from "./Navbaar";
 
+import ProgressBar from "./ProgressBar"
+
 export default function ImageUpload(props) {
 
     const [token, setToken] = useState(localStorage.getItem('token'))
@@ -193,16 +195,17 @@ export default function ImageUpload(props) {
 
     return (
         <> <div className="image-upload-full">
+            {loading && <ProgressBar loading={loading} setLoading={setLoading} />}
+
             <Navbaar />
             <div className="w-100 d-flex align-items-center justify-content-center">
                 <div className="col-md-8 image-upload-main-component">
                     <p className="upload-image-text" style={{ textAlign: "center" }}>Upload Images</p>
                     <label htmlFor="multiple-image-upload" className="w-100">
                         <div className="border rounded w-100 p-5">
-                            {loading ? <SpinnerComp /> : 
+                            {loading ? <SpinnerComp /> :
                                 <>
-                                    <button className="bg-light btn btn-primary text-dark mb-3">Choose Files</button>
-                                    <p>or drag and drop files here</p>
+                                    <h4 className="m-0 opacity-75">Choose Files</h4>
                                 </>
                             }
                         </div>
@@ -212,12 +215,12 @@ export default function ImageUpload(props) {
                         {selectedImages.map((image, index) => (
                             <div className="col-md-3">
                                 <img className="p-3 border w-100 rounded" key={index} src={image} alt={`Selected ${index + 1}`} />
-                                <button className="btn btn-danger text-align-right mt-3">Delete</button>
+                                {/* <button className="btn btn-danger text-align-right mt-3">Delete</button> */}
                             </div>
                         ))}
                     </div>
                     <div>
-                        {loading ? <LoadingBtn /> : <button className="btn btn-primary mt-2 mb-3" onClick={handleUploadImageToServer}>Next</button>}
+                        {loading ? <LoadingBtn /> : <button className=" border-0 log-in-btn mt-2 mb-3" onClick={handleUploadImageToServer}>Next</button>}
                     </div>
                 </div>
             </div>
