@@ -263,6 +263,7 @@ body {
   padding: 20px;
   overflow-y: scroll;
   height: 90vh;
+  width: 25%;
 }
 ::-webkit-scrollbar {
   width: 6px; /* width of the scrollbar */
@@ -315,7 +316,7 @@ body {
   font-size: 20px;
   font-weight: 500;
   color: #fff;
-  padding: 6px 60px;
+  padding: 6px 20px;
   border-radius: 10px;
   background: linear-gradient(180deg, #71c0fc, #41a7f5);
 }
@@ -361,12 +362,14 @@ body {
 .image-compare-main-div {
   display: flex;
   gap: 20px;
+  padding: 10px;
 }
 .input-image-div {
   display: flex;
   flex-direction: column;
-
   gap: 20px;
+  width: 33%;
+  padding: 10px;
 }
 .text-allign {
   text-align: center;
@@ -376,12 +379,34 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 33%;
+  padding: 10px;
 }
-.feedback-image-div {
+/* .feedback-image-div {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   gap: 20px;
+} */
+.task-details-main-content {
+  width: 75%;
+  overflow-y: scroll;
+  height: 90vh;
+  padding: 20px;
+}
+.task-details-content-details {
+  display: flex;
+  justify-content: space-between;
+}
+.task-details-main-image-div {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  padding: 18px;
+}
+.image-feedback-div {
+  width: 30%;
+  padding: 18px;
 }
 
 /* make the design responsive */
@@ -489,6 +514,64 @@ body {
     border: 1px solid #6a64f1;
     padding: 4px 10px;
   }
+
+  /* ALL TASK DETAILS PAGE */
+  .task-button-list {
+    padding: 8px;
+    overflow-y: scroll;
+    height: 90vh;
+    width: 20%;
+  }
+  .log-in-btn {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #71c0fc, #41a7f5);
+  }
+  .task-details-main-content {
+    width: 80%;
+    overflow-y: scroll;
+    height: 90vh;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .task-details-content-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .task-details-main-image-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+  }
+  .input-image-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+  }
+  .output-image-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+  }
+  .image-feedback-div {
+    width: 100%;
+    padding: 10px;
+  }
+  .image-compare-main-div {
+    display: flex;
+    gap: 20px;
+    padding: 6px;
+  }
 }
 
 @media (width < 550px) {
@@ -540,5 +623,53 @@ body {
   }
   .tastklist-btn {
     font-size: small;
+  }
+  .task-details-main-content {
+    width: 80%;
+    overflow-y: scroll;
+    height: 90vh;
+    font-size: 12px;
+  }
+  .image-compare-main-div {
+    display: flex;
+    gap: 20px;
+    padding: 4px;
+  }
+  .task-details-main-image-div {
+    padding: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .input-image-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 0px;
+  }
+  .output-image-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 0px;
+  }
+  .image-feedback-div {
+    width: 100%;
+    padding: 0px;
+  }
+  .log-in-btn {
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+    padding: 4px 4px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #71c0fc, #41a7f5);
+  }
+  .task-button-list {
+    padding: 4px;
+    overflow-y: scroll;
+    height: 90vh;
+    width: 20%;
   }
 }

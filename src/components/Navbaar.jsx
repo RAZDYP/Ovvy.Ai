@@ -25,7 +25,7 @@ export default function Navbaar() {
                     </div>
                     <div className="col-md-3 d-flex align-items-center justify-content-between">
                         <a href="/all-task-details" style={{ textDecoration: "none" }}>
-                            <button className=" bg-transparent rounded p-1 d-flex align-items-center me-3" style={{ fontFamily: "verdana" }}>
+                            <button className=" bg-transparent rounded p-1 d-flex align-items-center me-3 tastklist-btn" style={{ fontFamily: "verdana" }}>
                                 <Image src={taskIcon} className="me-2" alt="task icon" width={20} />
                                 <p className="m-0" >TaskList</p>
 
