@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import './App.css';
 import { useState } from 'react';
-import { ChakraProvider } from '@chakra-ui/react'
 
 
 // bootstrap import
@@ -12,7 +11,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import ImageUpload from './components/ImageUpload';
 import SingleTaskDetails from './components/SingleTaskDetails';
 import AllTasksDetails from './components/AllTasksDetails';
-import SignUp from './components/SignUp';
 import ProtectedRoutes from './services/ProtectedRoutes';
 
 
@@ -29,9 +27,7 @@ function App() {
 
     <Router>
       <Routes>
-        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-
         {/* PROTECTED ROUTES */}
         <Route path="/" element={<ProtectedRoutes />} >
           <Route path="/" element={<ImageUpload taskId={taskId} setTaskId={setTaskId} />} />
