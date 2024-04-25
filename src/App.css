@@ -538,4 +538,7 @@ body {
   .modal-main-header {
     font-size: 14px;
   }
+  .tastklist-btn {
+    font-size: small;
+  }
 }

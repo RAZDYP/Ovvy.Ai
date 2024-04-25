@@ -12,11 +12,8 @@ export default function ImageUpload(props) {
 
     const [token, setToken] = useState(localStorage.getItem('token'))
     const [taskIdHardCoded, setTaskIdHardCoded] = useState(['ea92ae70-0469-4f90-a4c4-df5424aeb241'])
-
-
     const [loading, setLoading] = useState(false);
     const [selectedImages, setSelectedImages] = useState([]);
-
     const [imageList, setImageList] = useState([]);
 
     useEffect(() => {

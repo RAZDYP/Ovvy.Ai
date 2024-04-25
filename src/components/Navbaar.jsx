@@ -2,25 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css"
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import SpinnerComp from "./SpinnerComp";
 import notificationIcon from "../Images/notification.png"
+import LogoutIcon from "../Images/logout.png"
+import taskIcon from "../Images/taskicon.png"
 import { Image } from "react-bootstrap";
 import Link from 'react-router-dom';
 
 export default function Navbaar() {
     const navigate = useNavigate()
-
-    const user = JSON.parse(localStorage.getItem('user'))
-
     const handleLogout = () => {
         localStorage.removeItem('isLoggedIn')
         navigate('/login')
     }
-
-
-
     return (
         <>
             <nav className="navbar shadow navbar-light bg-light main-navbar text-white">
@@ -30,17 +23,23 @@ export default function Navbaar() {
                             <img src="https://ovvy.ai/frontend/images/ovvy-logo.svg" className="main-logo" alt="Ovvy Logo" ></img>
                         </a>
                     </div>
-                    <div className="col-md-2 d-flex align-items-center justify-content-between">
-                        <a href="/new-details" >
-                            <button className="position-relative border-0 bg-transparent me-3" style={{ fontFamily: "verdana" }}>
-                                Archive
-                                <Image src={notificationIcon} className="notification-icon ms-2" alt="notification icon" width={20} />
+                    <div className="col-md-3 d-flex align-items-center justify-content-between">
+                        <a href="/all-task-details" style={{ textDecoration: "none" }}>
+                            <button className=" bg-transparent rounded p-1 d-flex align-items-center me-3" style={{ fontFamily: "verdana" }}>
+                                <Image src={taskIcon} className="me-2" alt="task icon" width={20} />
+                                <p className="m-0" >TaskList</p>
+
+                                {/* <Image src={notificationIcon} className="notification-icon ms-2" alt="notification icon" width={20} />
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontFamily: "verdana" }}>
                                     9+
-                                </span>
+                                </span> */}
                             </button>
                         </a>
-                        <button className="btn btn-primary" onClick={handleLogout}>Log out</button>
+                        <button className="bg-transparent rounded p-1 d-flex align-items-center" onClick={handleLogout}>
+                            <Image src={LogoutIcon} className="me-2" alt="logout icon" width={20} />
+                            <p className="m-0" >LogOut</p>
+
+                        </button>
                     </div>
 
 
