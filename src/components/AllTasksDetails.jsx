@@ -32,7 +32,7 @@ function AllTasksDetails() {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const response = await fetch('https://ovvyml.com/api/data', {
+                const response = await fetch('https://ovvyml.com/api/data/', {
                     method: 'GET',
                     headers: {
                         'accept': 'application/json',
