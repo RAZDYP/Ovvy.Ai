@@ -19,7 +19,7 @@ export default function SingleTaskDetails(props) {
         const fetchData = async () => {
             console.log("This is the task id in single task details: ", localStorage.getItem('task_id'))
             try {
-                const response = await fetch('http://34.138.136.100:3000/data/' + localStorage.getItem('task_id'), {
+                const response = await fetch('https://ovvyml.com/api/data/' + localStorage.getItem('task_id'), {
                     method: 'GET',
                     headers: {
                         'accept': 'application/json',

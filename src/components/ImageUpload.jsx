@@ -20,7 +20,7 @@ export default function ImageUpload(props) {
         const checkValidityAndCreateToken = async () => {
             const CheckTokenValidity = async () => {
                 try {
-                    const response = await fetch('http://34.138.136.100:8004/tasks/' + taskIdHardCoded, {
+                    const response = await fetch('https://ovvyml.com/api/tasks/' + taskIdHardCoded, {
                         method: 'GET',
                         headers: {
                             'accept': 'application/json',
@@ -44,7 +44,7 @@ export default function ImageUpload(props) {
             }
             const handleCreateToken = async () => {
                 setLoading(true)
-                await fetch('http://34.138.136.100:8004/create-token', {
+                await fetch('https://ovvyml.com/api/create-token', {
                     method: 'POST',
                     headers: {
                         'accept': 'application/json',

@@ -20,7 +20,7 @@ function CompareImages() {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const response = await fetch('http://34.138.136.100:3000/data', {
+                const response = await fetch('https://ovvyml.com/api/data/', {
                     method: 'GET',
                     headers: {
                         'accept': 'application/json',
@@ -44,7 +44,7 @@ function CompareImages() {
     const fetchImages = async (taskId) => {
         setLoading(true)
         try {
-            const response = await fetch('http://34.138.136.100:3000/data/' + taskId, {
+            const response = await fetch('https://ovvyml.com/api/data/' + taskId, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
