@@ -12,7 +12,7 @@ function Login(props) {
     })
     const handleLogin = (e) => {
         e.preventDefault()
-        if ("user" === input.email && "password" === input.password) {
+        if ("admin" === input.email && "password" === input.password) {
             localStorage.setItem('isLoggedIn', true)
             navigate('/')
             alert('Login successful')
