@@ -21,7 +21,6 @@ export default function SingleTaskDetails(props) {
             try {
                 const response = await fetch('https://ovvyml.com/api/data/' + localStorage.getItem('task_id'), {
                     method: 'GET',
-                    mode: 'no-cors',
                     headers: {
                         'accept': 'application/json',
                         'Content-Type': 'application/json',
