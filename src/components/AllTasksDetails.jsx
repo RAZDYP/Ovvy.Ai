@@ -140,8 +140,10 @@ function AllTasksDetails() {
     return (
         <>
             <Navbaar />
-            <div className="w-100 modal-body-main d-flex justify-content-between">
-                <div className="task-button-list bg-white w-25" >
+
+            <div className="w-100 modal-body- p-0 d-flex justify-content-between">
+
+                <div className="task-button-list bg-white" >
                     {taskData.map((task, index) => {
                         return (
                             <div className=" p-2 w-100 " >
@@ -155,39 +157,38 @@ function AllTasksDetails() {
                     }
                     )}
                 </div>
-                <div className="w-75 task-button-list" >
-                    <div className=" p-3 mt-2 w-100 text-white row">
-                        <div className="col-md-12  p-2 ">
-                            <h1 className="task-detail-header">Task Details</h1>
-                            <hr></hr>
-                            <div className="d-flex   justify-content-between w-100">
-                                <p className="task-status-text m-0">Successful count : {loading ? <SpinnerWhite /> : succesfullCount}</p>
-                                <p className="task-status-text m-0">Failed count : {loading ? <SpinnerWhite /> : failedCount}
-                                </p>
-                                <p className="task-status-text m-0">Folder ID : {loading ? <SpinnerWhite /> : folderId}
-                                </p>
-                                <p className="task-status-text m-0">
-                                    Task ID : {loading ? <SpinnerWhite /> : taskId}
-                                </p>
-                            </div>
-                            <hr></hr>
+                <div className="task-details-main-content " >
+                    <div className="mt-2 w-100 text-white ">
+                        <h1 className="task-detail-header">Task Details</h1>
+                        <hr></hr>
+                        <div className="task-details-content-details w-100">
+                            <p className="task-status-text m-0">Successful count : {loading ? <SpinnerWhite /> : succesfullCount}</p>
+                            <p className="task-status-text m-0">Failed count : {loading ? <SpinnerWhite /> : failedCount}
+                            </p>
+                            <p className="task-status-text m-0">Folder ID : {loading ? <SpinnerWhite /> : folderId}
+                            </p>
+                            <p className="task-status-text m-0">
+                                Task ID : {loading ? <SpinnerWhite /> : taskId}
+                            </p>
                         </div>
-                        <div className="w-100 row  image-compare-main-div">
+                        <hr></hr>
+
+                        <div className=" row  image-compare-main-div">
                             {
                                 imageUrls.map((image, index) => {
                                     return (
-                                        <div className="col-md-12 d-flex justify-content-between align-items-center border rounded-3 p-3">
-                                            <div className="col-md-4 p-2 input-image-div">
+                                        <div className="col-md-12 task-details-main-image-div border rounded-3">
+                                            <div className="input-image-div mb-2">
                                                 <h3 className="text-allign-left" style={{ fontFamily: "verdana" }}>Input</h3>
                                                 <img src={image.input_url} className=" bg-white rounded p-2" alt="Ovvy Logo" ></img>
                                             </div>
-                                            <div className="col-md-4 p-2 output-image-div">
+                                            <div className="output-image-div mb-2">
                                                 <h3 className="text-allign-left  fs-italic" style={{ fontFamily: "verdana" }}>Output</h3>
                                                 <img src={image.output_url} className=" bg-white rounded p-2" alt="Ovvy Logo" ></img>
                                             </div>
-                                            <div className="col-md-3 p-2 ">
+                                            <div className="image-feedback-div mb-2">
                                                 <div>
-                                                    <p className="f" style={{ fontFamily: "verdana" }}>Enter your feedback here</p>
+                                                    <Typography style={{ fontFamily: "verdana" }} component="legend" className="mb-2">Enter feedback for the image</Typography>
                                                     <textarea
                                                         type="text"
                                                         value={imagesFeedbackAndRatings[image.image_id]?.feedback || ''}
