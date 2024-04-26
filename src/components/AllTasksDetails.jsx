@@ -51,7 +51,7 @@ function AllTasksDetails() {
         fetchData();
     }, [])
 
-    const fetchImages = async (taskId) => {
+    const fetchImagesAndFeedbacks= async (taskId) => {
         setLoading(true)
         try {
             const response = await fetch(`http://localhost:3001/tasks/${taskId}`, {
@@ -68,11 +68,31 @@ function AllTasksDetails() {
             setFolderId(data.folder_id)
             setTaskId(data.task_id)
             setLoading(false)
+
+            const feedbackAndRatings = await fetch(`http://localhost:3001/${taskId}/feedback-rating`, {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            const feedbackAndRatingsData = await feedbackAndRatings.json();
+            console.log(feedbackAndRatingsData);
+            // { image_id: { feedback: '...', ratings: 0 } }
+            setImagesFeedbackAndRatings(
+                feedbackAndRatingsData.reduce((acc, { image_id, feedback, ratings }) => {
+                    acc[image_id] = { feedback, ratings };
+                    return acc;
+                }, {})
+            );
         } catch (error) {
             console.error('Error fetching images:', error);
             setLoading(false)
         }
     }
+
+    console.log(imagesFeedbackAndRatings);
 
     const updateFeedbackAndRating = async (taskId, imageId) => {
         try {
@@ -102,6 +122,7 @@ function AllTasksDetails() {
             [imageId]: {
                 ...prevState[imageId],
                 feedback: value,
+                ratings: prevState[imageId]?.ratings || 0,
             },
         }));
     };
@@ -125,7 +146,7 @@ function AllTasksDetails() {
                         return (
                             <div className=" p-2 w-100 " >
                                 <button key={task.id} className=" w-100 log-in-btn   border-0 mb-3" style={{ fontFamily: "verdana" }}
-                                    onClick={() => fetchImages(task.id)}
+                                    onClick={() => fetchImagesAndFeedbacks(task.id)}
                                 >
                                     Task {index + 1}
                                 </button>

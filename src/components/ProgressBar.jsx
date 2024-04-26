@@ -50,7 +50,7 @@ export default function LinearDeterminate(props) {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <LinearProgress variant="determinate" value={progress} />
+            <LinearProgress variant="determinate" value={progress} style={{height: "10px"}} />
         </Box>
     );
 }
