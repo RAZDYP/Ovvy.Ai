@@ -34,7 +34,7 @@ export default function SingleTaskDetails(props) {
                 setFailedCount(data.embeds[0].fields[2].value)
                 setFolderId(data.embeds[0].fields[4].value)
                 setLoading(false)
-                await fetch(`http://localhost:3001/tasks/${data.id}/image-list`, {
+                await fetch(`https://ovvy-backend.onrender.com/tasks/${data.id}/image-list`, {
                     method: 'POST',
                     headers: {
                         'accept': 'application/json',

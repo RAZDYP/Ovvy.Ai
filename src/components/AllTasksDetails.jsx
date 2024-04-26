@@ -51,10 +51,10 @@ function AllTasksDetails() {
         fetchData();
     }, [])
 
-    const fetchImagesAndFeedbacks= async (taskId) => {
+    const fetchImagesAndFeedbacks = async (taskId) => {
         setLoading(true)
         try {
-            const response = await fetch(`http://localhost:3001/tasks/${taskId}`, {
+            const response = await fetch(`https://ovvy-backend.onrender.com/tasks/${taskId}`, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
@@ -69,7 +69,7 @@ function AllTasksDetails() {
             setTaskId(data.task_id)
             setLoading(false)
 
-            const feedbackAndRatings = await fetch(`http://localhost:3001/${taskId}/feedback-rating`, {
+            const feedbackAndRatings = await fetch(`https://ovvy-backend.onrender.com/${taskId}/feedback-rating`, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
@@ -96,7 +96,7 @@ function AllTasksDetails() {
 
     const updateFeedbackAndRating = async (taskId, imageId) => {
         try {
-            const response = await fetch(`http://localhost:3001/${taskId}/${imageId}/feedback-rating`, {
+            const response = await fetch(`https://ovvy-backend.onrender.com/${taskId}/${imageId}/feedback-rating`, {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
