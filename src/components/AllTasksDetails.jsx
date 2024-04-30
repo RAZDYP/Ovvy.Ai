@@ -32,7 +32,7 @@ function AllTasksDetails() {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const response = await fetch('https://ovvyml.com/api/data/', {
+                const response = await fetch('https://ovvy-ml-vbxfn7ps6a-uc.a.run.app/datastore/tasks', {
                     method: 'GET',
                     headers: {
                         'accept': 'application/json',
@@ -41,6 +41,7 @@ function AllTasksDetails() {
                 })
                 const data = await response.json();
                 setTaskData(data);
+                console.log("This is the task data: ", data)
                 setLoading(false)
             }
             catch (error) {
@@ -54,7 +55,7 @@ function AllTasksDetails() {
     const fetchImagesAndFeedbacks = async (taskId) => {
         setLoading(true)
         try {
-            const response = await fetch(`https://ovvy-backend.onrender.com/tasks/${taskId}`, {
+            const response = await fetch(`https://ovvy-ml-vbxfn7ps6a-uc.a.run.app/datastore/tasks/${taskId}`, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
@@ -69,7 +70,7 @@ function AllTasksDetails() {
             setTaskId(data.task_id)
             setLoading(false)
 
-            const feedbackAndRatings = await fetch(`https://ovvy-backend.onrender.com/${taskId}/feedback-rating`, {
+            const feedbackAndRatings = await fetch(`https://ovvy-ml-vbxfn7ps6a-uc.a.run.app/datastore/${taskId}/feedback-rating`, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
@@ -96,7 +97,7 @@ function AllTasksDetails() {
 
     const updateFeedbackAndRating = async (taskId, imageId) => {
         try {
-            const response = await fetch(`https://ovvy-backend.onrender.com/${taskId}/${imageId}/feedback-rating`, {
+            const response = await fetch(`https://ovvy-ml-vbxfn7ps6a-uc.a.run.app/datastore/${taskId}/${imageId}/feedback-rating`, {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
@@ -148,7 +149,7 @@ function AllTasksDetails() {
                         return (
                             <div className=" p-2 w-100 " >
                                 <button key={task.id} className=" w-100 log-in-btn   border-0 mb-3" style={{ fontFamily: "verdana" }}
-                                    onClick={() => fetchImagesAndFeedbacks(task.id)}
+                                    onClick={() => fetchImagesAndFeedbacks(task.task_id)}
                                 >
                                     Task {index + 1}
                                 </button>

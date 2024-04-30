@@ -100,7 +100,7 @@ export default function ImageUpload(props) {
     const handleImageUploadToFirebase = async (e) => {
         setLoading(true);
         const file = e.target.files;
-        // make sure to convert the FileList to an Array
+        //  convert the FileList to an Array
         const fileArray = Array.from(file);
         const urls = await uploadImages(fileArray);
         if (urls) {
